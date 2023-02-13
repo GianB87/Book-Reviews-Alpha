@@ -1,3 +1,4 @@
+/* ckeditor style configuration */
 #post * {
     font-family: 'Comfortaa', cursive;
     color: whitesmoke;
@@ -11,9 +12,6 @@
     text-indent: 6rem;
     overflow-wrap: break-word;
 }
-/* #post p {
-    text-transform:capitalize;
-} */
 #post ol li {
     margin: 0;
     text-indent: 2rem;
@@ -23,7 +21,6 @@ li::marker {
 
     color: #abb7c4;   
 }
-
 #post ul li {
     list-style: circle;
     text-indent: 2rem;
@@ -92,8 +89,98 @@ li::marker {
     border: 0.1rem solid #4280bf;
     border-radius: 0.1rem;
 }
+/* ckeditor style configuration */
+iframe html body.cke_editable * {
+    font-family: 'Comfortaa', cursive;
+    color: whitesmoke;
+    margin: 0.2em 0;
+    font-size: 1.8rem;
+    text-align: justify;
+    font-weight: 300;
+    text-justify: inter-word;
+    letter-spacing: 0.05rem;
+    line-height: 2em !important;
+    text-indent: 6rem;
+    overflow-wrap: break-word;
+}
+iframe html body.cke_editable ol li {
+    margin: 0;
+    text-indent: 2rem;
+    margin-left: 6rem;
+}
+li::marker {
 
-    div a img.book-grid { 
+    color: #abb7c4;   
+}
+iframe html body.cke_editable ul li {
+    list-style: circle;
+    text-indent: 2rem;
+    margin-left: 6rem;
+}
+
+iframe html body.cke_editable h1 {
+    font-size: 6rem;
+  } 
+iframe html body.cke_editable  h2 {
+    font-size: 5rem;
+}
+iframe html body.cke_editable h3 {
+    font-size: 4.5rem;
+  }
+  
+iframe html body.cke_editable  h4 {
+    font-size: 4rem !important;
+}
+iframe html body.cke_editable h5 {
+    font-size: 3.5rem;
+  } 
+iframe html body.cke_editable  h6 {
+    font-size: 3rem;
+    margin: 15px 0;
+}
+iframe html body.cke_editable h1, iframe html body.cke_editable h2, iframe html body.cke_editable h3, iframe html body.cke_editable h4, iframe html body.cke_editable h5, iframe html body.cke_editable h6 {
+    text-indent: 0;
+    text-align: center;
+
+}
+iframe html body.cke_editable h1, iframe html body.cke_editable h2, iframe html body.cke_editable h3, iframe html body.cke_editable h4, iframe html body.cke_editable h5, iframe html body.cke_editable h6, iframe html body.cke_editable strong {
+    font-weight: bold;
+}
+
+iframe html body.cke_editable blockquote {
+    position: relative;
+    left: 6rem;
+    text-indent: 0;
+}
+iframe html body.cke_editable blockquote p{
+    text-indent: 1rem;   
+}
+iframe html body.cke_editable pre {
+    text-indent: 0;
+    color: #abb7c4; 
+    background-color: #071829;
+    margin: 2rem 3rem;
+    padding: 1rem 4rem;
+    border-radius: 2rem;
+    border: 0.1rem solid #4280bf;
+}
+iframe html body.cke_editable a span {
+    text-decoration: underline;
+    color: #4280bf; 
+    transition: color 0.5s ease;
+    font-style: italic; 
+    letter-spacing: 0.15rem;
+}
+iframe html body.cke_editable a span:hover {
+    color: #dcf836;  
+    font-weight: bold;
+
+}
+iframe html body.cke_editable hr {
+    border: 0.1rem solid #4280bf;
+    border-radius: 0.1rem;
+}
+div a img.book-grid { 
         width: 100%;
         height: 26rem;
         border: 0.3rem solid #405266;

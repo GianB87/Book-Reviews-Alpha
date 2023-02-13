@@ -6,7 +6,8 @@ import uuid
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver 
 from ckeditor.fields import RichTextField
-
+# from posts.models import Post
+# probably delete
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, null=True, blank=True)
@@ -14,14 +15,6 @@ class Profile(models.Model):
     email = models.EmailField(max_length=500, blank=True, null=True)
     username = models.CharField(max_length=200, blank=True, null=True)
     location = models.CharField(max_length=200, blank=True, null=True)
-    summary = RichTextField(max_length=500, blank=True, null=True)
-    bio = RichTextField(blank=True, null=True)
-    profile_image = models.ImageField(
-        null=True, blank=True, upload_to='profiles/', default="profiles/user-default.png")
-    social_github = models.CharField(max_length=200, blank=True, null=True)
-    social_linkedin = models.CharField(max_length=200, blank=True, null=True)
-    social_youtube = models.CharField(max_length=200, blank=True, null=True)
-    social_website = models.CharField(max_length=200, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
@@ -39,9 +32,6 @@ class Profile(models.Model):
         except:
             url = ''
         return url
-
-
-
 
 class Message(models.Model):
     sender = models.ForeignKey(

@@ -150,5 +150,6 @@ CKEDITOR_CONFIGS = {
         ],
         'width': '100%',
         'extraPlugins': 'justify,liststyle,indent',
+        "contentsCss": '/static/styles/uploader.css'
    },
 }

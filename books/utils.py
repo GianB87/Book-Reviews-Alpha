@@ -29,15 +29,6 @@ def paginateBooks(request, books, results, interval):
     custom_range = range(leftIndex, rightIndex)
 
     return custom_range, books, paginator.num_pages
-# def order_title(value):
-#     if value == 'Low Rated First':
-#         return 'rate_asc'
-#     elif value == 'Oldest First':
-#         return 'date_asc'
-#     elif value == 'High Rated First':
-#         return 'rate_desc'
-#     else:
-#         return 'date_desc'
 def searchBooks(request):
     search_query = ''
     search_rate = ''
@@ -56,14 +47,12 @@ def searchBooks(request):
             (Q(title__icontains=search_query) |
             Q(authors__icontains=search_query) |
             Q(isbn__icontains=search_query)) & Q(rate=search_rate)
-            # | Q(tags__in=tags)
         )
     else:
         books = Book.objects.distinct().filter(
             (Q(title__icontains=search_query) |
             Q(authors__icontains=search_query) |
             Q(isbn__icontains=search_query))
-            # | Q(tags__in=tags)
         )
     books = books.order_by('-review_date') if search_order == 'date_desc' else books.order_by('review_date') if search_order == 'date_asc' else books.order_by('-rate') if search_order == 'rate_desc' else books.order_by('rate')
     

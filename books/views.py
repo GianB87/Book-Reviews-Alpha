@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 import requests
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
@@ -7,8 +7,25 @@ from django.views.generic.edit import CreateView
 from .models import Book
 from .forms import BookForm
 from .utils import searchBooks, paginateBooks
-
+from django.contrib import messages
  
+
+def img_validation(book_data, book,request):
+    if not book.image_link:
+        try:
+            image_list = book_data['items'][0]['volumeInfo']['imageLinks']
+            try:
+                book.image_link = image_list['thumbnail']
+            except KeyError:
+                book.image_link = book_data['items'][0]['volumeInfo']['imageLinks']['smallThumbnail']
+            except KeyError:
+                messages.error(request,"Thumbnail does not exist")
+                return HttpResponseRedirect(request.path_info)
+        except:
+            messages.error(request,"Thumbnail does not exist")
+            return HttpResponseRedirect(request.path_info)
+    book.save()
+    return redirect('books')
 values = {0: 'NOT RATED',
         1: 'DO NOT READ',
         2: 'VERY BAD',
@@ -24,7 +41,7 @@ values = {0: 'NOT RATED',
 def books(request): 
     books, search_query, search_rate, search_order = searchBooks(request)
     custom_range, books, num_pages = paginateBooks(request, books, results=12, interval = 3)
-
+ 
     context = {'books': books,
                'search_query': search_query,'ratings': values, 
                'search_rate':search_rate, 'custom_range': custom_range,
@@ -47,13 +64,41 @@ def createBook(request):
             
             # ^ add a case when this fail
 
+            try: 
+                book_data = requests.get('https://www.googleapis.com/books/v1/volumes?q=isbn:' + str(book.isbn)).json()
+                book.title = book_data['items'][0]['volumeInfo']['title']
+                authors = book_data['items'][0]['volumeInfo']['authors']
+                book.authors = ' - '.join([str(elem) for elem in authors])
+                return img_validation(book_data, book,request)
+            except:
+                book.save()
+                return redirect('books')
+            
+            
+    context = {'form': form}
+    return render(request, "books/book-form.html", context)
 
-            book_data = requests.get('https://www.googleapis.com/books/v1/volumes?q=isbn:' + str(book.isbn)).json()
-            book.title = book_data['items'][0]['volumeInfo']['title']
-            authors = book_data['items'][0]['volumeInfo']['authors']
-            book.authors = ' - '.join([str(elem) for elem in authors])
-            book.image_link = book_data['items'][0]['volumeInfo']['imageLinks']['thumbnail']
-            book.save()
-            return redirect('books')
+@login_required(login_url="home")
+def updateBook(request, pk):
+    # profile = request.user.profile
+    book = Book.objects.get(id=pk)
+    form = BookForm(instance=book)
+
+    if request.method == 'POST':
+
+        form = BookForm(request.POST, request.FILES, instance=book)
+        if form.is_valid():
+            try:
+                book_data = requests.get('https://www.googleapis.com/books/v1/volumes?q=isbn:' + str(book.isbn)).json()
+                book.title = book_data['items'][0]['volumeInfo']['title']
+                authors = book_data['items'][0]['volumeInfo']['authors']
+                book.authors = ' - '.join([str(elem) for elem in authors])
+                return img_validation(book_data, book,request)
+            except:
+                book.save()
+                return redirect('books')
+
+
+
     context = {'form': form}
     return render(request, "books/book-form.html", context)

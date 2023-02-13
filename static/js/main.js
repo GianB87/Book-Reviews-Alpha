@@ -76,6 +76,17 @@ if (document.getElementById("pop-up")) {
     }, 2600
     );
 }
+
+function changeImage()
+{
+let img = document.getElementById("img");
+let source = document.getElementById("id_image_link").value;
+if (source){
+    img.src=source;
+} else {
+    img.src='/static/images/uploads/user-img.png'
+}
+}
 // Remember me functionality disable
 // $(function() {
  

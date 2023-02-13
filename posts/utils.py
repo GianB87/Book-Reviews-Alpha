@@ -31,14 +31,16 @@ def searchPosts(request):
     search_query = ''
 
     search_order = 'date_desc' 
-
+    search_cat = ''
     if request.GET.get('search_query'):
         search_query = request.GET.get('search_query')
 
     if request.GET.get('search_order'):
         search_order = request.GET.get('search_order')
+    if request.GET.get('search_cat'):
+        search_cat = request.GET.get('search_cat')
 
-    tags = Tag.objects.filter(name__icontains=search_query)
+    tags = Tag.objects.filter(name__icontains=search_cat)
     posts = Post.objects.distinct().filter(
         (Q(title__icontains=search_query) |
         Q(description__icontains=search_query))
@@ -46,4 +48,4 @@ def searchPosts(request):
     )
     posts = posts.order_by('-created') if search_order == 'date_desc' else posts.order_by('created') if search_order == 'date_asc' else posts.order_by('-vote_total') if search_order == 'rate_desc' else posts.order_by('vote_total')
     
-    return posts, search_query, search_order
+    return posts, search_query, search_order, search_cat

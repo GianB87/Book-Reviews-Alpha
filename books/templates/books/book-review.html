@@ -24,8 +24,8 @@
 						</div>						  
 						{% endif %}
 						<div class="btn-transform transform-vertical">
-							<div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Buy ticket</a></div>
-							<div><a href="#" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
+							<div><a href="{% url 'update-book' book.id %}" class="item item-1 yellowbtn"> <i class="ion-card"></i> Edit</a></div>
+							<div><a href="{% url 'update-book' book.id %}" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
 						</div>
 					</div>
 				</div>
@@ -72,20 +72,21 @@
 								<li class="active"><a href="#overviewceb">Review</a></li>
 								<li><a href="#biography">Summary</a></li>
 								{% if book.youtube_link %}
-								<li><a href="#mediaceb">Video</a></li> 
+								<!-- <li><a href="#mediaceb">Video</a></li>  -->
 								{% endif %}
-								<li><a href="#filmography">Other Reviews</a></li>                        
+								<!-- <li><a href="#filmography">Other Reviews</a></li>                         -->
 							</ul>
 						    <div class="tab-content">
 						        <div id="overviewceb" class="tab active">
 						            <div class="row">
-						            	<div class="col-md-8 col-sm-12 col-xs-12">
+										<!-- PREVIOUS 8 -->
+						            	<div class="col-md-12 col-sm-12 col-xs-12">
 											<div class="editor" id="post"'>
 
 												{{book.review|safe}}
 											</div>
 						            	</div>
-						            	<div class="col-md-4 col-xs-12 col-sm-12">
+						            	<!-- <div class="col-md-4 col-xs-12 col-sm-12">
 						            		<div class="sb-it">
 						            			<h6>Created by: </h6>
 						            			<p><a href="#">Gian Baltazar</a></p>
@@ -99,17 +100,17 @@
 						            			<h6>Country:  </h6>
 						            			<p>Chile</p>
 						            		</div>
-						            		<!-- <div class="sb-it">
+						            		<div class="sb-it">
 						            			<h6>Keywords:</h6>
 						            			<p class="tags">
 						            				<span class="time"><a href="#">jackman</a></span>
 						            			</p>
-						            		</div> -->
-                                            <!-- optional -->
+						            		</div>
+
 						            		<div class="ads">
 												<img src="/static/images/uploads/ads1.png" alt="">
 											</div>
-						            	</div>
+						            	</div> -->
 						            </div>
 						        </div>
 						        <div id="biography" class="tab">
@@ -172,6 +173,73 @@
 		</div>
 	</div>
 </div>
+<!-- comment section -->
+<!-- <div class="page-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="blog-detail-ct">
+					
+					<div class="comments">
+						<h4>04 Comments</h4>
+						<div class="cmt-item flex-it">
+							<img src="images/uploads/author.png" alt="">
+							<div class="author-infor">
+								<div class="flex-it2">
+									<h6><a href="#">Steve Perry</a></h6> <span class="time"> - 27 Mar 2017</span>
+								</div>
+								<p>Even though Journey's classic vocalist Steve Perry didn’t reunite with the band during their Rock Hall performance (to the dismay of hopeful fans), he did offer up a touching speech.</p>
+								<p><a class="rep-btn" href="#">+ Reply</a></p>
+							</div>
+						</div>
+						<div class="cmt-item flex-it reply">
+							<img src="images/uploads/author2.png" alt="">
+							<div class="author-infor">
+								<div class="flex-it2">
+									<h6><a href="#">Joss Whedon</a></h6> <span class="time"> - 27 Mar 2017</span>
+								</div>
+								<p>Prince died not long after the 2016 Rock Hall ceremony, so this year's edition featured Lenny Kravitz and a full gospel choir performing a swamp-funk take on When Doves Cry.</p>
+							</div>
+						</div>
+						<div class="cmt-item flex-it">
+							<img src="images/uploads/author4.png" alt="">
+							<div class="author-infor">
+								<div class="flex-it2">
+									<h6><a href="#">Margot Robbie</a></h6> <span class="time"> - 27 Mar 2017</span>
+								</div>
+								<p>Joan Baez was the sharpest of the Rock Hall inductees, singing about deportees and talking social activism as well as joking about her age and the likelihood that a good portion of the Barclays. </p>
+								<p><a class="rep-btn" href="#">+ Reply</a></p>
+							</div>
+						</div>
+					</div>
+					<div class="comment-form">
+						<h4>Leave a comment</h4>
+						<form action="">
+							<div class="row">
+								<div class="col-md-4">
+									<input type="text" placeholder="Your name">
+								</div>
+								<div class="col-md-4">
+									<input type="text" placeholder="Your email">
+								</div>
+								<div class="col-md-4">
+									<input type="text" placeholder="Website">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<textarea name="message" id="" placeholder="Message"></textarea>
+								</div>
+							</div>
+							<input class="submit" type="submit" placeholder="submit">
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
 {% endblock content %}
 
 

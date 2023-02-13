@@ -59,8 +59,6 @@ def loginPostHttp(request):
             return HttpResponse('Wrong User Name or Password')
             messages.error(request, 'Username does not exist')
         user = authenticate(request, username=username, password=password)
-        print(username,password)
-        print(user)
         if user is not None:
             login(request, user) # this is how we establish an user is login
             messages.success(request,"Welcome Back Dear " + user.get_username().capitalize())

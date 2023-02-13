@@ -6,8 +6,8 @@ from .models import Book
 class BookForm(ModelForm):
     class Meta:
         model = Book
-        fields = ['isbn', 'rate', 'youtube_link', 'summary',
-                  'review']
+        fields = ['isbn', 'title', 'authors', 'rate', 'image_link',
+        'youtube_link','review', 'summary']
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),
         }

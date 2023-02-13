@@ -11,11 +11,13 @@ from .models import Tag, Post
 # Create your views here.
 
 def blog(request):
-    posts, search_query,  search_order = searchPosts(request)
+    posts, search_query,  search_order, search_cat = searchPosts(request)
     custom_range, posts, num_pages = paginatePosts(request, posts, results=5, interval = 3)
     postPop = Post.objects.all().order_by('-vote_total')[:3]
-    context = {'posts': posts,
+    tags = Tag.objects.all()
+    context = {'posts': posts, 'tags':tags,
                'search_query': search_query,
+               'search_cat': search_cat,
                'pops':postPop,
                'custom_range': custom_range,
                'search_order': search_order, 'num_pages': num_pages}
@@ -33,7 +35,7 @@ def createPost(request):
     form = PostForm()
     if request.method == 'POST':
         form = PostForm(request.POST)
-        if form.is_valid():
+        if form.is_valid(): 
             post = form.save(commit=False)
             post.owner = profile
             form.save()
